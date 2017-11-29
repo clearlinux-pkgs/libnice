@@ -1,0 +1,7 @@
+Configure miss: net/in.h usability
+Configure miss: net/in.h presence
+Configure miss: net/in.h
+Configure miss: to see if compiler understands -Werror -Wstrict-prototypes
+Configure miss: to see if compiler understands -Werror -Wold-style-definition
+Configure miss: GUPNP
+Configure miss: whether to build static plugins or not
