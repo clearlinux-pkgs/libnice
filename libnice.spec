@@ -6,7 +6,7 @@
 #
 Name     : libnice
 Version  : 0.1.14
-Release  : 2
+Release  : 3
 URL      : https://nice.freedesktop.org/releases/libnice-0.1.14.tar.gz
 Source0  : https://nice.freedesktop.org/releases/libnice-0.1.14.tar.gz
 Source99 : https://nice.freedesktop.org/releases/libnice-0.1.14.tar.gz.asc
