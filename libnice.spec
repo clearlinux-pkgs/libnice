@@ -6,7 +6,7 @@
 #
 Name     : libnice
 Version  : 0.1.15
-Release  : 4
+Release  : 5
 URL      : https://nice.freedesktop.org/releases/libnice-0.1.15.tar.gz
 Source0  : https://nice.freedesktop.org/releases/libnice-0.1.15.tar.gz
 Source99 : https://nice.freedesktop.org/releases/libnice-0.1.15.tar.gz.asc
@@ -25,7 +25,6 @@ BuildRequires : gobject-introspection-dev
 BuildRequires : gtk-doc
 BuildRequires : gtk-doc-dev
 BuildRequires : libxslt-bin
-BuildRequires : openssl-dev
 BuildRequires : pkgconfig(gstreamer-1.0)
 BuildRequires : pkgconfig(gstreamer-base-1.0)
 BuildRequires : pkgconfig(gstreamer-plugins-base-1.0)
@@ -101,7 +100,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1545956828
+export SOURCE_DATE_EPOCH=1545957000
 %configure --disable-static --with-gstreamer --without-gstreamer-0.10
 make  %{?_smp_mflags}
 
@@ -113,7 +112,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1545956828
+export SOURCE_DATE_EPOCH=1545957000
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libnice
 cp COPYING %{buildroot}/usr/share/package-licenses/libnice/COPYING
