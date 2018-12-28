@@ -5,24 +5,27 @@
 # Source0 file verified with key 0x1D388E5A4ED9A2BB (tester@tester.ca)
 #
 Name     : libnice
-Version  : 0.1.14
-Release  : 3
-URL      : https://nice.freedesktop.org/releases/libnice-0.1.14.tar.gz
-Source0  : https://nice.freedesktop.org/releases/libnice-0.1.14.tar.gz
-Source99 : https://nice.freedesktop.org/releases/libnice-0.1.14.tar.gz.asc
+Version  : 0.1.15
+Release  : 4
+URL      : https://nice.freedesktop.org/releases/libnice-0.1.15.tar.gz
+Source0  : https://nice.freedesktop.org/releases/libnice-0.1.15.tar.gz
+Source99 : https://nice.freedesktop.org/releases/libnice-0.1.15.tar.gz.asc
 Summary  : ICE library
 Group    : Development/Tools
 License  : LGPL-2.1 MPL-1.1
-Requires: libnice-bin
-Requires: libnice-lib
-Requires: libnice-doc
-Requires: libnice-data
+Requires: libnice-bin = %{version}-%{release}
+Requires: libnice-data = %{version}-%{release}
+Requires: libnice-lib = %{version}-%{release}
+Requires: libnice-license = %{version}-%{release}
+BuildRequires : buildreq-meson
 BuildRequires : docbook-xml
+BuildRequires : glibc-bin
+BuildRequires : gnutls-dev
 BuildRequires : gobject-introspection-dev
 BuildRequires : gtk-doc
 BuildRequires : gtk-doc-dev
 BuildRequires : libxslt-bin
-BuildRequires : pkgconfig(gnutls)
+BuildRequires : openssl-dev
 BuildRequires : pkgconfig(gstreamer-1.0)
 BuildRequires : pkgconfig(gstreamer-base-1.0)
 BuildRequires : pkgconfig(gstreamer-plugins-base-1.0)
@@ -31,13 +34,14 @@ BuildRequires : pkgconfig(gstreamer-plugins-base-1.0)
 Nice: GLib ICE library
 ======================
 ---------
-(C) 2006-2017 Collabora Ltd.
+(C) 2006-2018 Collabora Ltd.
 (C) 2006-2011 Nokia Corporation
 
 %package bin
 Summary: bin components for the libnice package.
 Group: Binaries
-Requires: libnice-data
+Requires: libnice-data = %{version}-%{release}
+Requires: libnice-license = %{version}-%{release}
 
 %description bin
 bin components for the libnice package.
@@ -54,10 +58,10 @@ data components for the libnice package.
 %package dev
 Summary: dev components for the libnice package.
 Group: Development
-Requires: libnice-lib
-Requires: libnice-bin
-Requires: libnice-data
-Provides: libnice-devel
+Requires: libnice-lib = %{version}-%{release}
+Requires: libnice-bin = %{version}-%{release}
+Requires: libnice-data = %{version}-%{release}
+Provides: libnice-devel = %{version}-%{release}
 
 %description dev
 dev components for the libnice package.
@@ -74,21 +78,30 @@ doc components for the libnice package.
 %package lib
 Summary: lib components for the libnice package.
 Group: Libraries
-Requires: libnice-data
+Requires: libnice-data = %{version}-%{release}
+Requires: libnice-license = %{version}-%{release}
 
 %description lib
 lib components for the libnice package.
 
 
+%package license
+Summary: license components for the libnice package.
+Group: Default
+
+%description license
+license components for the libnice package.
+
+
 %prep
-%setup -q -n libnice-0.1.14
+%setup -q -n libnice-0.1.15
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1514583087
+export SOURCE_DATE_EPOCH=1545956828
 %configure --disable-static --with-gstreamer --without-gstreamer-0.10
 make  %{?_smp_mflags}
 
@@ -100,8 +113,12 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1514583087
+export SOURCE_DATE_EPOCH=1545956828
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/libnice
+cp COPYING %{buildroot}/usr/share/package-licenses/libnice/COPYING
+cp COPYING.LGPL %{buildroot}/usr/share/package-licenses/libnice/COPYING.LGPL
+cp COPYING.MPL %{buildroot}/usr/share/package-licenses/libnice/COPYING.MPL
 %make_install
 
 %files
@@ -109,11 +126,8 @@ rm -rf %{buildroot}
 
 %files bin
 %defattr(-,root,root,-)
-/usr/bin/sdp-example
-/usr/bin/simple-example
 /usr/bin/stunbdc
 /usr/bin/stund
-/usr/bin/threaded-example
 
 %files data
 %defattr(-,root,root,-)
@@ -142,7 +156,7 @@ rm -rf %{buildroot}
 /usr/lib64/pkgconfig/nice.pc
 
 %files doc
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/gtk-doc/html/libnice/NiceAgent.html
 /usr/share/gtk-doc/html/libnice/NiceCandidate.html
 /usr/share/gtk-doc/html/libnice/annotation-glossary.html
@@ -155,17 +169,6 @@ rm -rf %{buildroot}
 /usr/share/gtk-doc/html/libnice/ch05.html
 /usr/share/gtk-doc/html/libnice/home.png
 /usr/share/gtk-doc/html/libnice/index.html
-/usr/share/gtk-doc/html/libnice/ix03.html
-/usr/share/gtk-doc/html/libnice/ix04.html
-/usr/share/gtk-doc/html/libnice/ix05.html
-/usr/share/gtk-doc/html/libnice/ix06.html
-/usr/share/gtk-doc/html/libnice/ix07.html
-/usr/share/gtk-doc/html/libnice/ix08.html
-/usr/share/gtk-doc/html/libnice/ix09.html
-/usr/share/gtk-doc/html/libnice/ix10.html
-/usr/share/gtk-doc/html/libnice/ix11.html
-/usr/share/gtk-doc/html/libnice/ix12.html
-/usr/share/gtk-doc/html/libnice/ix13.html
 /usr/share/gtk-doc/html/libnice/left-insensitive.png
 /usr/share/gtk-doc/html/libnice/left.png
 /usr/share/gtk-doc/html/libnice/libnice-Bind.html
@@ -195,4 +198,10 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 /usr/lib64/gstreamer-1.0/libgstnice.so
 /usr/lib64/libnice.so.10
-/usr/lib64/libnice.so.10.7.0
+/usr/lib64/libnice.so.10.8.0
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/libnice/COPYING
+/usr/share/package-licenses/libnice/COPYING.LGPL
+/usr/share/package-licenses/libnice/COPYING.MPL

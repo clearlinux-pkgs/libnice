@@ -1,0 +1,4 @@
+0.1.15
+glibc-bin
+gnutls-dev
+gobject-introspection-dev

@@ -5,3 +5,4 @@ Configure miss: to see if compiler understands -Werror -Wstrict-prototypes
 Configure miss: to see if compiler understands -Werror -Wold-style-definition
 Configure miss: GUPNP
 Configure miss: whether to build static plugins or not
+Configure miss: whether to ignore a specific network interface name prefix
