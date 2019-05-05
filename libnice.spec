@@ -6,11 +6,11 @@
 #
 Name     : libnice
 Version  : 0.1.15
-Release  : 5
+Release  : 6
 URL      : https://nice.freedesktop.org/releases/libnice-0.1.15.tar.gz
 Source0  : https://nice.freedesktop.org/releases/libnice-0.1.15.tar.gz
 Source99 : https://nice.freedesktop.org/releases/libnice-0.1.15.tar.gz.asc
-Summary  : ICE library
+Summary  : An implementation of the IETF's draft ICE (for p2p UDP data streams)
 Group    : Development/Tools
 License  : LGPL-2.1 MPL-1.1
 Requires: libnice-bin = %{version}-%{release}
@@ -30,11 +30,19 @@ BuildRequires : pkgconfig(gstreamer-base-1.0)
 BuildRequires : pkgconfig(gstreamer-plugins-base-1.0)
 
 %description
-Nice: GLib ICE library
-======================
----------
-(C) 2006-2018 Collabora Ltd.
-(C) 2006-2011 Nokia Corporation
+Microsoft Visual Studio v9.0 (aka Microsoft Visual Studio 2008)
+---------------------------------------------------------------
+1) Download prerequisites (glib, zlib and gettext-runtime)
+Go to http://www.gtk.org/download/win32.php
+Download GLib Run-time and Dev packages. At time of writing GLib current version is 2.28.8.
+Links are
+http://ftp.gnome.org/pub/gnome/binaries/win32/glib/2.28/glib_2.28.8-1_win32.zip
+http://ftp.gnome.org/pub/gnome/binaries/win32/glib/2.28/glib-dev_2.28.8-1_win32.zip
+Download zlib and gettext-runtime Run-time package. At time of writing zlib current version is 1.2.5
+and gettext-runtime current version is 0.18.1.1
+Links are
+http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/zlib_1.2.5-2_win32.zip
+http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/gettext-runtime_0.18.1.1-2_win32.zip
 
 %package bin
 Summary: bin components for the libnice package.
@@ -61,6 +69,7 @@ Requires: libnice-lib = %{version}-%{release}
 Requires: libnice-bin = %{version}-%{release}
 Requires: libnice-data = %{version}-%{release}
 Provides: libnice-devel = %{version}-%{release}
+Requires: libnice = %{version}-%{release}
 
 %description dev
 dev components for the libnice package.
@@ -100,7 +109,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1545957000
+export SOURCE_DATE_EPOCH=1557079071
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static --with-gstreamer --without-gstreamer-0.10
 make  %{?_smp_mflags}
 
@@ -112,7 +128,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1545957000
+export SOURCE_DATE_EPOCH=1557079071
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libnice
 cp COPYING %{buildroot}/usr/share/package-licenses/libnice/COPYING
