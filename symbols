@@ -18,6 +18,7 @@ libnice.so.10:nice_address_to_string
 libnice.so.10:nice_agent_add_local_address
 libnice.so.10:nice_agent_add_stream
 libnice.so.10:nice_agent_attach_recv
+libnice.so.10:nice_agent_close_async
 libnice.so.10:nice_agent_forget_relays
 libnice.so.10:nice_agent_gather_candidates
 libnice.so.10:nice_agent_generate_local_candidate_sdp
@@ -34,11 +35,13 @@ libnice.so.10:nice_agent_get_selected_socket
 libnice.so.10:nice_agent_get_stream_name
 libnice.so.10:nice_agent_get_type
 libnice.so.10:nice_agent_new
+libnice.so.10:nice_agent_new_full
 libnice.so.10:nice_agent_new_reliable
 libnice.so.10:nice_agent_option_get_type
 libnice.so.10:nice_agent_parse_remote_candidate_sdp
 libnice.so.10:nice_agent_parse_remote_sdp
 libnice.so.10:nice_agent_parse_remote_stream_sdp
+libnice.so.10:nice_agent_peer_candidate_gathering_done
 libnice.so.10:nice_agent_recv
 libnice.so.10:nice_agent_recv_messages
 libnice.so.10:nice_agent_recv_messages_nonblocking
