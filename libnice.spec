@@ -6,11 +6,11 @@
 #
 Name     : libnice
 Version  : 0.1.16
-Release  : 8
+Release  : 9
 URL      : https://nice.freedesktop.org/releases/libnice-0.1.16.tar.gz
 Source0  : https://nice.freedesktop.org/releases/libnice-0.1.16.tar.gz
-Source99 : https://nice.freedesktop.org/releases/libnice-0.1.16.tar.gz.asc
-Summary  : An implementation of the IETF's draft ICE (for p2p UDP data streams)
+Source1  : https://nice.freedesktop.org/releases/libnice-0.1.16.tar.gz.asc
+Summary  : ICE library
 Group    : Development/Tools
 License  : LGPL-2.1 MPL-1.1
 Requires: libnice-bin = %{version}-%{release}
@@ -19,6 +19,7 @@ Requires: libnice-lib = %{version}-%{release}
 Requires: libnice-license = %{version}-%{release}
 BuildRequires : buildreq-meson
 BuildRequires : docbook-xml
+BuildRequires : glibc-bin
 BuildRequires : gnutls-dev
 BuildRequires : gobject-introspection-dev
 BuildRequires : gtk-doc
@@ -61,7 +62,6 @@ Requires: libnice-bin = %{version}-%{release}
 Requires: libnice-data = %{version}-%{release}
 Provides: libnice-devel = %{version}-%{release}
 Requires: libnice = %{version}-%{release}
-Requires: libnice = %{version}-%{release}
 
 %description dev
 dev components for the libnice package.
@@ -95,37 +95,39 @@ license components for the libnice package.
 
 %prep
 %setup -q -n libnice-0.1.16
+cd %{_builddir}/libnice-0.1.16
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1557450546
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1604616245
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static --with-gstreamer --without-gstreamer-0.10
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1557450546
+export SOURCE_DATE_EPOCH=1604616245
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libnice
-cp COPYING %{buildroot}/usr/share/package-licenses/libnice/COPYING
-cp COPYING.LGPL %{buildroot}/usr/share/package-licenses/libnice/COPYING.LGPL
-cp COPYING.MPL %{buildroot}/usr/share/package-licenses/libnice/COPYING.MPL
+cp %{_builddir}/libnice-0.1.16/COPYING %{buildroot}/usr/share/package-licenses/libnice/f28fffc35dc811f921fd3f6e4bb72e1904254e12
+cp %{_builddir}/libnice-0.1.16/COPYING.LGPL %{buildroot}/usr/share/package-licenses/libnice/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/libnice-0.1.16/COPYING.MPL %{buildroot}/usr/share/package-licenses/libnice/8c4580d7288e21a3006db26c0fe556d00545768a
 %make_install
 
 %files
@@ -209,6 +211,6 @@ cp COPYING.MPL %{buildroot}/usr/share/package-licenses/libnice/COPYING.MPL
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/libnice/COPYING
-/usr/share/package-licenses/libnice/COPYING.LGPL
-/usr/share/package-licenses/libnice/COPYING.MPL
+/usr/share/package-licenses/libnice/8c4580d7288e21a3006db26c0fe556d00545768a
+/usr/share/package-licenses/libnice/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+/usr/share/package-licenses/libnice/f28fffc35dc811f921fd3f6e4bb72e1904254e12
