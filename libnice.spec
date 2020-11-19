@@ -7,9 +7,9 @@
 Name     : libnice
 Version  : 0.1.16
 Release  : 9
-URL      : https://nice.freedesktop.org/releases/libnice-0.1.16.tar.gz
-Source0  : https://nice.freedesktop.org/releases/libnice-0.1.16.tar.gz
-Source1  : https://nice.freedesktop.org/releases/libnice-0.1.16.tar.gz.asc
+URL      : https://libnice.freedesktop.org/releases/libnice-0.1.16.tar.gz
+Source0  : https://libnice.freedesktop.org/releases/libnice-0.1.16.tar.gz
+Source1  : https://libnice.freedesktop.org/releases/libnice-0.1.16.tar.gz.asc
 Summary  : ICE library
 Group    : Development/Tools
 License  : LGPL-2.1 MPL-1.1
