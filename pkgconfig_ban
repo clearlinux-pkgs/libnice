@@ -2,3 +2,4 @@
 # but are undesirable. One entry per line, no whitespace.
 gstreamer-0.10
 gstreamer-base-0.10
+gupnp-igd-1.0

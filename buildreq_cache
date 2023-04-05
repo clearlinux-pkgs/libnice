@@ -1,4 +1,7 @@
-0.1.16
-glibc-bin
+0.1.21
 gnutls-dev
-gobject-introspection-dev
+gobject-introspection
+openssl-dev
+pkgconfig(gnutls)
+pkgconfig(gobject-introspection-1.0)
+pkgconfig(gupnp-igd-1.0)
