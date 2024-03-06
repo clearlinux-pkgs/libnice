@@ -9,7 +9,7 @@
 #
 Name     : libnice
 Version  : 0.1.22
-Release  : 11
+Release  : 12
 URL      : https://libnice.freedesktop.org/releases/libnice-0.1.22.tar.gz
 Source0  : https://libnice.freedesktop.org/releases/libnice-0.1.22.tar.gz
 Source1  : https://libnice.freedesktop.org/releases/libnice-0.1.22.tar.gz.asc
