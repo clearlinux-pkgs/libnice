@@ -1,7 +1,6 @@
-0.1.21
+0.1.22
 gnutls-dev
 gobject-introspection
 openssl-dev
 pkgconfig(gnutls)
 pkgconfig(gobject-introspection-1.0)
-pkgconfig(gupnp-igd-1.0)
